@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    unoptimized: false, // Enable image optimization
+    unoptimized: true, // Disable image optimization to keep images unoptimized
     formats: ['image/png'], // Specify only PNG format to avoid conversion
   },
   eslint: {
@@ -24,14 +24,12 @@ module.exports = {
     return config;
   },
   experimental: {
-    optimizeFonts: true, // Enables font optimization for production builds
     scrollRestoration: true, // Maintains scroll position on navigation
     nextScriptWorkers: true, // Enables next.js script workers for improved performance
-    images: {
-      layout: 'fill', // Makes images fully responsive and prevents layout shift issues
-    },
-    metadataBase: 'https://jilikoni-tea.vercel.app/', // Set metadataBase for handling SEO and relative URLs correctly
   },
-  productionBrowserSourceMaps: false, // Disable source maps in production for better performance
-  favicon: '/public/icons/favicon.ico', // Ensure favicon.ico is served correctly from the public directory
+  head: {
+    link: [
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' }, // Specify favicon link for the site
+    ],
+  },
 };
