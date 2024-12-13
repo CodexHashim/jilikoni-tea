@@ -1,13 +1,14 @@
-module.exports = {
-  images: {
-    unoptimized: true, // Disable image optimization to keep images unoptimized
-    formats: ['image/png'], // Specify only PNG format to avoid conversion
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
   eslint: {
-    ignoreDuringBuilds: true, // Disable linting during builds
+    ignoreDuringBuilds: true,
   },
-  output: 'standalone', // Set the output mode to standalone for full static export
-  webpack(config, options) {
+  images: { 
+    unoptimized: true 
+  },
+  webpack(config) {
+    // Load the UnusedWebpackPlugin
     const UnusedWebpackPlugin = require('unused-webpack-plugin');
 
     if (!UnusedWebpackPlugin) {
@@ -16,20 +17,22 @@ module.exports = {
 
     config.plugins.push(
       new UnusedWebpackPlugin({
-        patterns: ['src/**/*.{js,jsx,ts,tsx}'], // Patterns to search for unused files
-        exclude: ['!node_modules/**/*'], // Exclude node_modules directory from the check
+        patterns: ['src/**/*.{js,jsx,ts,tsx}'], // Specify the directories and file types you want to check
+        exclude: ['!node_modules/**/*'], // Optionally exclude certain files
       })
     );
 
     return config;
   },
-  experimental: {
-    scrollRestoration: true, // Maintains scroll position on navigation
-    nextScriptWorkers: true, // Enables next.js script workers for improved performance
-  },
   head: {
     link: [
-      { rel: 'icon', type: 'image/png', href: '/favicon.png' }, // Specify favicon link for the site
+      { 
+        rel: 'icon', 
+        type: 'image/png', 
+        href: '/icons/favicon.png' // Update this path to match your favicon file in the public/icons directory
+      },
     ],
   },
 };
+
+module.exports = nextConfig;
