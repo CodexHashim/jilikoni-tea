@@ -1,13 +1,14 @@
-module.exports = {
-  images: {
-    unoptimized: false, // Enable image optimization
-    formats: ['image/png'], // Specify only PNG format to avoid conversion
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
   eslint: {
-    ignoreDuringBuilds: true, // Disable linting during builds
+    ignoreDuringBuilds: true,
   },
-  output: 'standalone', // Set the output mode to standalone for full static export
-  webpack(config, options) {
+  images: { 
+    unoptimized: true 
+  },
+  webpack(config) {
+    // Load the UnusedWebpackPlugin
     const UnusedWebpackPlugin = require('unused-webpack-plugin');
 
     if (!UnusedWebpackPlugin) {
@@ -16,21 +17,22 @@ module.exports = {
 
     config.plugins.push(
       new UnusedWebpackPlugin({
-        patterns: ['src/**/*.{js,jsx,ts,tsx}'], // Patterns to search for unused files
-        exclude: ['!node_modules/**/*'], // Exclude node_modules directory from the check
+        patterns: ['src/**/*.{js,jsx,ts,tsx}'], // Specify the directories and file types you want to check
+        exclude: ['!node_modules/**/*'], // Optionally exclude certain files
       })
     );
 
     return config;
   },
-  experimental: {
-    optimizeFonts: true, // Enables font optimization for production builds
-    scrollRestoration: true, // Maintains scroll position on navigation
-    nextScriptWorkers: true, // Enables next.js script workers for improved performance
-    images: {
-      layout: 'fill', // Makes images fully responsive and prevents layout shift issues
-    },
-    metadataBase: 'https://jilikoni-tea.vercel.app/', // Set metadataBase for handling SEO and relative URLs correctly
+  head: {
+    link: [
+      { 
+        rel: 'icon', 
+        type: 'image/png', 
+        href: '/icons/favicon.png' // Update this path to match your favicon file in the public/icons directory
+      },
+    ],
   },
-  productionBrowserSourceMaps: false, // Disable source maps in production for better performance
 };
+
+module.exports = nextConfig;

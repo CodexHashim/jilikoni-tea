@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/icons/favicon.ico" sizes="16x16 32x32 48x48" />
+        <link rel="icon" href="/favicon.png" sizes="16x16 32x32 48x48" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={inter.className}>
