@@ -33,4 +33,5 @@ module.exports = {
     metadataBase: 'https://jilikoni-tea.vercel.app/', // Set metadataBase for handling SEO and relative URLs correctly
   },
   productionBrowserSourceMaps: false, // Disable source maps in production for better performance
+  favicon: '/public/icons/favicon.ico', // Ensure favicon.ico is served correctly from the public directory
 };
