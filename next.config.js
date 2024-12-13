@@ -23,6 +23,6 @@ module.exports = {
     return config;
   },
   experimental: {
-    metadataBase: 'http://localhost:3000', // Update this with your Next.js development server URL
+    metadataBase: 'https://jilikoni-tea.vercel.app/', // Update this with your Next.js development server URL
   },
 };
